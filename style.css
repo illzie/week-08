@@ -1,0 +1,97 @@
+:root {
+    --clr-background: #f8f8ff;
+    --clr-accent: #25bad0;
+    --clr-text: #454545;
+    --clr-disabled: #b6b6b6;
+}
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    background-color: var(--clr-background);
+    color: var(--clr-text);
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/*
+    Credits for grid layout @KevinPowell
+    https://codepen.io/kevinpowell/pen/ExrZrrw
+*/
+.content-grid {
+    --padding-inline: 2rem;
+    --content-max-width: 70ch;
+    --breakout-max-width: 85ch;
+    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width))/2);
+    display: grid;
+    grid-template-columns: [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - var(--padding-inline) * 2, var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+.content-grid> :not(.breakout, .full-width),
+.content-grid .full-width> :not(.breakout, .full-width) {
+    grid-column: content;
+}
+
+.content-grid>.breakout {
+    grid-column: breakout;
+}
+
+.content-grid>.full-width {
+    grid-column: full-width;
+}
+
+header {
+    padding-block: 2em;
+    flex: 1;
+}
+
+header img {
+    filter: drop-shadow(0px 1000px 0 var(--clr-accent));
+    transform: translateY(-1000px);
+}
+
+.accent {
+    color: var(--clr-accent);
+}
+
+h1 {
+    text-align: center;
+    margin-block: 1rem;
+}
+
+a {
+    color: var(--clr-accent);
+}
+
+small code,
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+small code {
+    color: var(--clr-disabled);
+}
+
+.student,
+.course {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.student {
+    justify-content: space-between;
+    padding-block-start: 1rem;
+}
+
+nav {
+    margin-block: 1rem;
+}
